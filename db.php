@@ -8,8 +8,8 @@
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'acf_philippines');
-define('DB_USER', 'acf_user');       // ← change to your MySQL username
-define('DB_PASS', 'your_password');  // ← change to your MySQL password
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
 /**
