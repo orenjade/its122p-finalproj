@@ -1,0 +1,671 @@
+/* ═══════════════════════════════════════════════════════════
+   PROJECTS.CSS — ACF Philippines Projects & Impact Page
+   ═══════════════════════════════════════════════════════════ */
+
+.projects-page { overflow-x: hidden; }
+
+/* ═══════════════════════════════════════════════════════════
+   HERO — navy background
+   ═══════════════════════════════════════════════════════════ */
+.pi-hero {
+  position: relative;
+  background: #1E1660;
+  padding: 7rem 2rem 6rem;
+  overflow: hidden;
+}
+.pi-hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.pi-shape   { position: absolute; border-radius: 50%; opacity: 0.12; }
+.pi-shape-1 { width: 500px; height: 500px; background: var(--orange); top: -150px; right: -100px; }
+.pi-shape-2 { width: 300px; height: 300px; background: var(--blue); bottom: -80px; left: 5%; opacity: 0.15; }
+.pi-shape-3 { width: 180px; height: 180px; background: #fff; top: 30%; left: 35%; opacity: 0.04; }
+
+.pi-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.pi-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: var(--orange-lt);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.4rem 1.1rem;
+  border-radius: 100px;
+  margin-bottom: 1.6rem;
+}
+.pi-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: pi-pulse 2s ease-in-out infinite;
+}
+@keyframes pi-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.4); opacity: 0.7; }
+}
+.pi-hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 7.5vw, 6rem);
+  color: #fff;
+  line-height: 1.0;
+  margin-bottom: 1.3rem;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.35);
+}
+.pi-hero-title em { font-style: normal; color: var(--orange); }
+.pi-hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  color: rgba(255,255,255,0.82);
+  line-height: 1.78;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+}
+
+/* Stats bar */
+.pi-stats-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 24px;
+  padding: 1.5rem 2.5rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.pi-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0 2rem;
+}
+.pi-stat-num {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--orange-lt);
+  line-height: 1;
+}
+.pi-stat-lbl {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+.pi-stat-divider {
+  width: 1.5px;
+  height: 48px;
+  background: rgba(255,255,255,0.2);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN SECTION
+   ═══════════════════════════════════════════════════════════ */
+.pi-section { background: #ffffff; padding: 5rem 2rem 5rem; }
+.pi-container { max-width: 1200px; margin: 0 auto; }
+
+.pi-section-top { text-align: center; margin-bottom: 2.5rem; }
+.pi-section-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--orange);
+  line-height: 1.12;
+  margin-bottom: 0.7rem;
+}
+.pi-section-sub {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.72;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FILTER BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+.pi-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.pi-filter-btn {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 0.6rem 1.35rem;
+  border-radius: 100px;
+  border: 2px solid rgba(30,22,96,0.15);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.14s;
+  white-space: nowrap;
+}
+.pi-filter-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  transform: translateY(-2px);
+}
+.pi-filter-btn--active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 0 #b84d08;
+}
+.pi-filter-btn--active:hover {
+  background: #c9540a;
+  border-color: #c9540a;
+  color: #fff;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #b84d08;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROJECT CARDS GRID — standardized, identical dimensions
+   ═══════════════════════════════════════════════════════════ */
+.pi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+/* Card: fixed layout, consistent height via flex */
+.pi-card {
+  background: var(--cream);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(30,22,96,0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  position: relative;
+}
+
+/* Colored pop-shadow on hover — rotates through palette */
+.pi-card:nth-child(3n+1):hover {
+  transform: translateX(-5px) translateY(-5px);
+  box-shadow: 5px 5px 0 #E8630A, 9px 9px 0 rgba(232,99,10,0.18);
+}
+.pi-card:nth-child(3n+2):hover {
+  transform: translateX(-5px) translateY(-5px);
+  box-shadow: 5px 5px 0 #2E7BBF, 9px 9px 0 rgba(46,123,191,0.18);
+}
+.pi-card:nth-child(3n+3):hover {
+  transform: translateX(-5px) translateY(-5px);
+  box-shadow: 5px 5px 0 #0E9E8E, 9px 9px 0 rgba(14,158,142,0.18);
+}
+
+/* Hidden state when filtered out */
+.pi-card--hidden {
+  display: none;
+}
+
+/* Image area — fixed 16:9 aspect ratio, never distorted */
+.pi-card-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--gray-lt);
+}
+.pi-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.pi-card:hover .pi-card-img img { transform: scale(1.05); }
+
+/* Category badge on top of image */
+.pi-card-cat {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1;
+}
+.pi-card-cat--blue   { background: var(--blue); }
+.pi-card-cat--teal   { background: #0E9E8E; }
+.pi-card-cat--purple { background: #9B59B6; }
+.pi-card-cat--green  { background: #27AE60; }
+
+/* Card body — grows to fill remaining height */
+.pi-card-body {
+  padding: 1.4rem 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.pi-card-title {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  color: var(--navy);
+  line-height: 1.3;
+  margin: 0 0 0.6rem;
+}
+.pi-card-desc {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.68;
+  margin: 0;
+  flex: 1;
+}
+
+/* Footer: date + link pinned to bottom */
+.pi-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1.5px solid rgba(30,22,96,0.07);
+}
+.pi-card-date {
+  font-size: 0.74rem;
+  color: #999;
+  font-weight: 700;
+}
+.pi-card-link {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--orange);
+  transition: color 0.18s;
+  white-space: nowrap;
+}
+.pi-card-link:hover { color: var(--navy); }
+
+/* No results */
+.pi-no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--gray);
+  grid-column: 1 / -1;
+}
+.pi-no-results span { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+.pi-no-results p { font-size: 1.05rem; }
+
+/* ═══════════════════════════════════════════════════════════
+   CTA STRIP — navy background
+   ═══════════════════════════════════════════════════════════ */
+.pi-cta-strip {
+  position: relative;
+  background: #1E1660;
+  padding: 5rem 2rem;
+  overflow: hidden;
+}
+.pi-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.pi-cta-text { max-width: 560px; }
+.pi-cta-tag {
+  display: inline-block;
+  background: rgba(232,99,10,0.2);
+  border: 1.5px solid rgba(232,99,10,0.4);
+  color: var(--orange-lt);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.32rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+.pi-cta-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0.85rem;
+}
+.pi-cta-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.75;
+}
+.pi-cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.pi-cta-btn {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 0.9rem 2rem;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+  white-space: nowrap;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.pi-cta-btn--primary {
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 5px 0 #b84d08;
+}
+.pi-cta-btn--primary:hover { transform: translateY(3px); box-shadow: 0 2px 0 #b84d08; }
+.pi-cta-btn--ghost {
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff;
+}
+.pi-cta-btn--ghost:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.55); }
+
+.pi-cta-deco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.pi-cta-c1 {
+  position: absolute;
+  width: 450px; height: 450px;
+  border-radius: 50%;
+  background: var(--orange);
+  top: -150px; right: -80px;
+  opacity: 0.1;
+}
+.pi-cta-c2 {
+  position: absolute;
+  width: 250px; height: 250px;
+  border-radius: 50%;
+  background: var(--blue);
+  bottom: -100px; left: 10%;
+  opacity: 0.15;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET ≤ 1024px
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .pi-grid { grid-template-columns: repeat(2, 1fr); }
+  .pi-cta-inner { flex-direction: column; text-align: center; gap: 2rem; }
+  .pi-cta-text { max-width: 100%; }
+  .pi-cta-actions { justify-content: center; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE ≤ 680px
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+  .pi-hero { padding: 5rem 1.25rem 4rem; }
+  .pi-stats-bar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .pi-stat-divider { width: 60px; height: 1.5px; }
+  .pi-stat { padding: 0; }
+
+  .pi-section { padding: 3.5rem 1.25rem 3rem; }
+  .pi-grid { grid-template-columns: 1fr; }
+
+  .pi-filters { gap: 0.5rem; }
+  .pi-filter-btn { font-size: 0.82rem; padding: 0.5rem 1rem; }
+
+  .pi-cta-strip { padding: 4rem 1.25rem; }
+  .pi-cta-actions { flex-direction: column; width: 100%; }
+  .pi-cta-btn { width: 100%; justify-content: center; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════ */
+.pi-filter-btn:focus-visible,
+.pi-cta-btn:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pi-card { transition: none; }
+  .pi-dot  { animation: none; }
+  .pi-card-img img { transition: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL / DETAIL DRAWER
+   ═══════════════════════════════════════════════════════════ */
+
+/* Cards become pointer-cursor since they're clickable */
+.pi-card[data-modal] { cursor: pointer; }
+.pi-card[data-modal]:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+/* ── Overlay backdrop ── */
+.pi-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 40, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.pi-modal-overlay--open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Modal panel ── */
+.pi-modal {
+  background: #fff;
+  border-radius: 28px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(10,8,40,0.35);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--orange) transparent;
+}
+.pi-modal-overlay--open .pi-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* ── Close button ── */
+.pi-modal-close {
+  position: sticky;
+  top: 1.1rem;
+  float: right;
+  margin: 1.1rem 1.1rem 0 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(30,22,96,0.08);
+  border: none;
+  color: var(--navy);
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, color 0.18s;
+  z-index: 10;
+  flex-shrink: 0;
+}
+.pi-modal-close:hover { background: var(--orange); color: #fff; }
+.pi-modal-close:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+
+/* ── Modal header band ── */
+.pi-modal-header {
+  padding: 2rem 2.5rem 1.75rem;
+  border-bottom: 1.5px solid rgba(30,22,96,0.08);
+  clear: both; /* clears the floated close button */
+}
+
+/* Category tag */
+.pi-modal-cat-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.95rem;
+  border-radius: 100px;
+  margin-bottom: 0.9rem;
+  background: var(--orange-bg);
+  color: var(--orange);
+}
+.pi-modal-cat--blue   { background: rgba(46,123,191,0.12); color: var(--blue); }
+.pi-modal-cat--teal   { background: rgba(14,158,142,0.12); color: #0E9E8E; }
+.pi-modal-cat--purple { background: rgba(155,89,182,0.12); color: #9B59B6; }
+.pi-modal-cat--green  { background: rgba(39,174,96,0.12);  color: #27AE60; }
+
+/* Title & lead */
+.pi-modal-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  color: var(--navy);
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+}
+.pi-modal-lead {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--orange);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Modal body ── */
+.pi-modal-body {
+  padding: 1.75rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Main description */
+.pi-modal-desc p {
+  font-size: 0.98rem;
+  color: var(--gray);
+  line-height: 1.85;
+  margin: 0;
+}
+
+/* Sub-section blocks */
+.pi-modal-block {}
+.pi-modal-sub-heading {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--orange-bg);
+}
+
+/* Key initiatives list */
+.pi-modal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pi-modal-list li {
+  background: var(--cream);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  border-left: 4px solid var(--orange);
+}
+
+.pi-modal-project-name {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+.pi-modal-project-detail {
+  font-size: 0.88rem;
+  color: var(--gray);
+  line-height: 1.72;
+  margin: 0;
+}
+
+/* How ACF Acts — checkmark bullets */
+.pi-modal-list--check li {
+  background: transparent;
+  border-left: none;
+  border-radius: 0;
+  padding: 0.35rem 0 0.35rem 2rem;
+  position: relative;
+  font-size: 0.92rem;
+  color: var(--gray);
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(30,22,96,0.06);
+}
+.pi-modal-list--check li:last-child { border-bottom: none; }
+.pi-modal-list--check li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  color: var(--orange);
+  font-weight: 900;
+  font-size: 0.88rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .pi-modal-overlay { padding: 0; align-items: flex-end; }
+  .pi-modal {
+    border-radius: 24px 24px 0 0;
+    max-height: 92vh;
+    max-width: 100%;
+  }
+  .pi-modal-header { padding: 1.5rem 1.5rem 1.25rem; }
+  .pi-modal-body   { padding: 1.5rem 1.5rem 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-modal-overlay { transition: none; }
+  .pi-modal         { transition: none; }
+}
