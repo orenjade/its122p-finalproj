@@ -3,6 +3,8 @@ require_once 'nav-footer.php';
 $currentPage = 'contact';
 
 $successMessage = '';
+$errorMessage = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data
     $fullName = htmlspecialchars($_POST['name'] ?? '');
@@ -10,8 +12,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = htmlspecialchars($_POST['phone'] ?? '');
     $subject = htmlspecialchars($_POST['subject'] ?? '');
     $message = htmlspecialchars($_POST['message'] ?? '');
+    $honeypot = $_POST['website'] ?? ''; // Spam protection
     
-    $successMessage = "Thank you, $fullName! Your message has been sent successfully.";
+    // Validate honeypot (should be empty)
+    if (!empty($honeypot)) {
+        $errorMessage = "Spam detected. Please try again.";
+    }
+    // Validate required fields
+    elseif (empty($fullName) || empty($email) || empty($message)) {
+        $errorMessage = "Please fill in all required fields.";
+    }
+    // Validate email format
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errorMessage = "Please enter a valid email address.";
+    }
+    else {
+        // Email configuration
+        $to = "info@acfphilippines.org"; // Change to your actual email
+        $emailSubject = "Contact Form: $subject";
+        $emailBody = "Name: $fullName\n";
+        $emailBody .= "Email: $email\n";
+        $emailBody .= "Phone: $phone\n";
+        $emailBody .= "Subject: $subject\n\n";
+        $emailBody .= "Message:\n$message";
+        $headers = "From: $email\r\n";
+        $headers .= "Reply-To: $email\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+        
+        // Try to send email
+        if (mail($to, $emailSubject, $emailBody, $headers)) {
+            $successMessage = "Thank you, $fullName! Your message has been sent successfully.";
+            // Clear form after success
+            $_POST = array();
+        } else {
+            $errorMessage = "Failed to send message. Please try again later or email us directly.";
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -91,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     .btn-submit:hover { background: #e07b00; }
 
-    /* Success Message Style */
+    /* Success/Error Message Styles */
     .success-message {
       background: #d4edda;
       color: #155724;
@@ -100,6 +136,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       margin-bottom: 20px;
       border: 1px solid #c3e6cb;
     }
+    
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .honeypot { display: none; }
   </style>
 </head>
 <body>
@@ -163,7 +210,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </div>
             <?php endif; ?>
             
+            <?php if ($errorMessage): ?>
+              <div class="error-message">
+                <?php echo $errorMessage; ?>
+              </div>
+            <?php endif; ?>
+            
             <form action="contact.php" method="POST">
+              <!-- Spam Protection (Honeypot) -->
+              <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+              
               <div class="form-group">
                 <label for="name">Full Name *</label>
                 <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
