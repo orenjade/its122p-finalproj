@@ -202,83 +202,84 @@ $currentPage = 'identity';
         <div class="id-team-header reveal">
           <div class="chip chip-b">The People Behind ACF</div>
           <h2 class="id-section-title">Our Team</h2>
+          <p class="id-section-sub">Dedicated public servants and community builders driving democratic change across the Philippines.</p>
         </div>
 
+        <!-- 5-column uniform grid — all cards identical size -->
         <div class="id-team-grid">
 
-          <!-- Arnold Tarrobago — Executive Director (featured) -->
-          <div class="id-team-card id-team-card--featured reveal reveal-delay-1">
+          <!-- Arnold Tarrobago -->
+          <div class="id-team-card reveal reveal-delay-1">
             <div class="id-team-photo-wrap">
-              <img src="images/AT.jpg"
-                   alt="Arnold Tarrobago — Executive Director"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-              />
+              <img src="images/team/arnold.jpg"
+                   alt="Arnold Tarrobago"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
               <div class="id-team-initials" style="display:none;">AT</div>
             </div>
             <div class="id-team-info">
               <div class="id-team-role-tag">Executive Director</div>
               <h3 class="id-team-name">Arnold Tarrobago</h3>
-              <p class="id-team-bio">Leading ACF's strategic direction and programs since its founding, Arnold champions participatory governance and the empowerment of marginalized communities across the Philippines.</p>
+              <p class="id-team-bio">Leads ACF's strategic direction and programs since its founding, championing participatory governance and the empowerment of marginalized communities.</p>
             </div>
           </div>
 
           <!-- Jordan Gutierrez -->
           <div class="id-team-card reveal reveal-delay-2">
             <div class="id-team-photo-wrap">
-              <img src="images/JG.jpg"
-                   alt="Jordan Gutierrez — Program Coordinator"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-              />
+              <img src="images/team/jordan.jpg"
+                   alt="Jordan Gutierrez"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
               <div class="id-team-initials" style="display:none;">JG</div>
             </div>
             <div class="id-team-info">
               <div class="id-team-role-tag id-team-role-tag--blue">Program Coordinator</div>
               <h3 class="id-team-name">Jordan Gutierrez</h3>
+              <p class="id-team-bio">Coordinates ACF's community outreach and civic education programs, building active citizenship networks across communities.</p>
             </div>
           </div>
 
           <!-- Millie Gines -->
           <div class="id-team-card reveal reveal-delay-3">
             <div class="id-team-photo-wrap">
-              <img src="images/MG.jpg"
-                   alt="Millie Gines — Program Coordinator"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-              />
+              <img src="images/team/millie.jpg"
+                   alt="Millie Gines"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
               <div class="id-team-initials" style="display:none;">MG</div>
             </div>
             <div class="id-team-info">
               <div class="id-team-role-tag id-team-role-tag--blue">Program Coordinator</div>
               <h3 class="id-team-name">Millie Gines</h3>
+              <p class="id-team-bio">Oversees program implementation and partner coordination, ensuring ACF's advocacy work reaches communities effectively.</p>
             </div>
           </div>
 
           <!-- Wilman Rebusta -->
           <div class="id-team-card reveal reveal-delay-1">
             <div class="id-team-photo-wrap">
-              <img src="images/WR.jpg"
-                   alt="Wilman Rebusta — Administrative Assistant"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-              />
+              <img src="images/team/wilman.jpg"
+                   alt="Wilman Rebusta"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
               <div class="id-team-initials" style="display:none;">WR</div>
             </div>
             <div class="id-team-info">
               <div class="id-team-role-tag id-team-role-tag--teal">Administrative Assistant</div>
               <h3 class="id-team-name">Wilman Rebusta</h3>
+              <p class="id-team-bio">Supports daily operations and organizational logistics, keeping ACF's office and field activities running smoothly.</p>
             </div>
           </div>
 
           <!-- Dhelma Victorio -->
           <div class="id-team-card reveal reveal-delay-2">
             <div class="id-team-photo-wrap">
-              <img src="images/DV.jpg"
-                   alt="Dhelma Victorio — Finance and Administrative Officer"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-              />
+              <img src="images/team/dhelma.jpg"
+                   alt="Dhelma Victorio"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
               <div class="id-team-initials" style="display:none;">DV</div>
             </div>
             <div class="id-team-info">
               <div class="id-team-role-tag id-team-role-tag--teal">Finance &amp; Admin Officer</div>
               <h3 class="id-team-name">Dhelma Victorio</h3>
+              <p class="id-team-bio">Manages ACF's financial reporting and administrative operations, ensuring transparency and accountability in all organizational activities.</p>
             </div>
           </div>
 
