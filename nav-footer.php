@@ -1,37 +1,25 @@
 <?php
 // nav-footer.php — ACF Philippines Shared Nav & Footer Include
 
-// Load auth helpers so we can check session state
 require_once __DIR__ . '/auth.php';
 
 function acf_nav($currentPage = '') {
-  // Read session state inside the function
-  $loggedIn   = is_logged_in();
-  $isAdmin    = is_admin();
-  $user       = $loggedIn ? current_user() : null;
+  $loggedIn = is_logged_in();
+  $isAdmin  = is_admin();
+  $user     = $loggedIn ? current_user() : null;
 ?>
-<!-- ══════════════════════════════════════════════════
-     UTILITY BAR
-══════════════════════════════════════════════════ -->
 <div class="utility-bar">
   <div class="utility-notice">📢 NOTICE: ACF programs now open for new community partners</div>
 </div>
 
-<!-- ══════════════════════════════════════════════════
-     MAIN HEADER
-══════════════════════════════════════════════════ -->
 <header class="site-header">
   <div class="header-inner">
 
     <!-- LOGO -->
     <a class="logo" href="index.php" aria-label="ACF Philippines Home">
-      <img
-        id="logo-img"
-        class="logo-img"
-        src="images/logo.jpg"
-        alt="Active Citizenship Foundation Philippines"
-        onerror="this.style.display='none';document.getElementById('logo-text-fallback').style.display='flex';"
-      />
+      <img id="logo-img" class="logo-img" src="images/logo.jpg"
+           alt="Active Citizenship Foundation Philippines"
+           onerror="this.style.display='none';document.getElementById('logo-text-fallback').style.display='flex';"/>
       <div id="logo-text-fallback" class="logo-text-fallback" style="display:none;">
         <div class="logo-acf">
           <span class="l-a">A</span><span class="l-c">C</span><span class="l-f">F</span>
@@ -40,7 +28,7 @@ function acf_nav($currentPage = '') {
       </div>
     </a>
 
-    <!-- Main nav -->
+    <!-- MAIN NAV: page links + user pill if logged in -->
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-btn<?= $currentPage === 'home'      ? ' active-page' : '' ?>" href="index.php"     data-page="home">Home</a>
       <a class="nav-btn<?= $currentPage === 'identity'  ? ' active-page' : '' ?>" href="identity.php"  data-page="identity">Our Identity</a>
@@ -49,37 +37,15 @@ function acf_nav($currentPage = '') {
       <a class="nav-btn<?= $currentPage === 'resources' ? ' active-page' : '' ?>" href="resources.php" data-page="resources">Resources &amp; Contact</a>
 
       <?php if ($loggedIn): ?>
-        <!-- ── LOGGED IN: user menu (mobile) ── -->
         <?php if ($isAdmin): ?>
           <a class="nav-btn nav-btn--user" href="admin/dashboard.php">🏠 Dashboard</a>
         <?php endif; ?>
-        <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php" style="display:none;">Sign Out</a>
-      <?php else: ?>
-        <!-- ── LOGGED OUT: login link (mobile) ── -->
-        <a class="nav-cta-mobile" href="login.php" style="display:none;">🔐 Sign In / Register</a>
-      <?php endif; ?>
-    </nav>
 
-    <!-- Hamburger (mobile) -->
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <!-- ── RIGHT SIDE: desktop auth area ── -->
-    <div class="nav-auth">
-      <?php if ($loggedIn): ?>
-
-        <?php if ($isAdmin): ?>
-          <!-- Admin: Dashboard link + user pill + logout -->
-          <a class="nav-btn nav-btn--user" href="admin/dashboard.php">🏠 Dashboard</a>
-        <?php endif; ?>
-
-        <!-- User pill dropdown -->
+        <!-- User pill with dropdown -->
         <div class="nav-user-pill" id="nav-user-pill">
           <span class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></span>
           <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
           <span class="nav-user-arrow">▾</span>
-
           <div class="nav-user-dropdown" id="nav-user-dropdown">
             <div class="nud-header">
               <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
@@ -95,11 +61,27 @@ function acf_nav($currentPage = '') {
           </div>
         </div>
 
+        <!-- Mobile: sign out -->
+        <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php" style="display:none;">↩ Sign Out</a>
+
       <?php else: ?>
-        <!-- Not logged in: Login button -->
-        <a class="nav-cta nav-cta--login" href="login.php">🔐 Sign In</a>
+        <!-- Logged out: Login link visible in nav -->
+        <a class="nav-btn nav-btn--login<?= $currentPage === 'login' ? ' active-page' : '' ?>" href="login.php" data-page="login">🔐 Login</a>
+        <!-- Mobile: login -->
+        <a class="nav-cta-mobile nav-cta-mobile--ghost" href="login.php" style="display:none;">🔐 Login / Register</a>
       <?php endif; ?>
-    </div>
+
+      <!-- Mobile only: Reach Us always at bottom of menu -->
+      <a class="nav-cta-mobile" href="contact.php" style="display:none;">✉ Reach Us</a>
+    </nav>
+
+    <!-- Hamburger (mobile) -->
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Desktop: Reach Us only, always on the far right -->
+    <a class="nav-cta" href="contact.php">Reach Us</a>
 
   </div>
 </header>
@@ -108,9 +90,6 @@ function acf_nav($currentPage = '') {
 
 function acf_footer() {
 ?>
-<!-- ══════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="footer-inner">
 

@@ -40,13 +40,19 @@
     var dropdown = document.getElementById('nav-user-dropdown');
     if (!pill || !dropdown) return;
 
+    // Always start closed
+    dropdown.classList.remove('open');
+    pill.classList.remove('open');
+
     pill.addEventListener('click', function (e) {
+      // Allow clicks on links inside the dropdown to navigate normally
+      if (e.target.closest('a')) return;
       e.stopPropagation();
       var isOpen = dropdown.classList.toggle('open');
       pill.classList.toggle('open', isOpen);
     });
 
-    // Close when clicking anywhere outside
+    // Close when clicking anywhere outside the pill
     document.addEventListener('click', function (e) {
       if (!pill.contains(e.target)) {
         dropdown.classList.remove('open');
@@ -54,7 +60,7 @@
       }
     });
 
-    // Close on Escape key
+    // Close on Escape
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         dropdown.classList.remove('open');

@@ -115,15 +115,7 @@
 .nav-btn.active-page { color: var(--orange); }
 .nav-btn .arrow { font-size: 0.6rem; opacity: .5; }
 
-/* ─── RIGHT SIDE AUTH AREA ─── */
-.nav-auth {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-shrink: 0;
-}
-
-/* Login button (logged out state) */
+/* ─── REACH US BUTTON (always far right) ─── */
 .nav-cta {
   flex-shrink: 0;
   background: var(--orange);
@@ -141,7 +133,19 @@
 }
 .nav-cta:hover { background: #c9540a; transform: translateY(2px); box-shadow: 0 2px 0 #b84d08; }
 
-/* ─── DASHBOARD BUTTON (admin) ─── */
+/* Login nav link (logged out state) */
+.nav-btn--login {
+  color: var(--orange);
+  border: 1.5px solid rgba(232,99,10,0.3);
+  border-radius: 8px;
+}
+.nav-btn--login:hover {
+  background: rgba(232,99,10,0.08);
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+/* Dashboard button (admin) */
 .nav-btn--user {
   font-size: 0.82rem;
   font-weight: 900;
@@ -218,10 +222,11 @@
 
 /* ─── USER DROPDOWN ─── */
 .nav-user-dropdown {
-  display: none;
+  display: none !important;
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
+  left: auto;
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 12px 40px rgba(30,22,96,0.18), 0 2px 8px rgba(30,22,96,0.08);
@@ -231,7 +236,7 @@
   z-index: 600;
 }
 .nav-user-dropdown.open {
-  display: block;
+  display: block !important;
   animation: nud-in .2s cubic-bezier(.22,.68,0,1.2) both;
 }
 
@@ -430,8 +435,8 @@
 @media (max-width: 900px) {
   .nav-hamburger { display: flex; }
 
-  /* Hide desktop auth area on mobile */
-  .nav-auth { display: none; }
+  /* Hide Reach Us desktop button on mobile — shown inside hamburger menu instead */
+  .nav-cta { display: none; }
 
   .main-nav {
     display: none;
