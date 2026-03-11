@@ -1,0 +1,15 @@
+# ═══════════════════════════════════════════════════════════
+# .htaccess — ACF Philippines Root Security Rules
+# ═══════════════════════════════════════════════════════════
+
+# Block direct HTTP access to sensitive backend files
+<FilesMatch "^(db|auth)\.php$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Disable directory listing site-wide
+Options -Indexes
+
+# Force UTF-8
+AddDefaultCharset UTF-8

@@ -1,0 +1,15 @@
+# ═══════════════════════════════════════════════════════════
+# admin/.htaccess — Block direct access to admin folder from
+# anyone not already authenticated via PHP session.
+# The PHP require_admin() guard is the real protection;
+# this .htaccess adds an extra layer.
+# ═══════════════════════════════════════════════════════════
+
+# Disable directory listing
+Options -Indexes
+
+# Prevent access to any file except .php pages
+<FilesMatch "^(?!.*\.php$)">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>

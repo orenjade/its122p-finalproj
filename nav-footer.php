@@ -1,10 +1,14 @@
 <?php
 // nav-footer.php — ACF Philippines Shared Nav & Footer Include
-// Usage: include 'nav-footer.php'; at the top of each page (for nav)
-//        and include 'nav-footer.php' with $section='footer' for footer.
-// Or use the helper functions below.
+
+// Load auth helpers so we can check session state
+require_once __DIR__ . '/auth.php';
 
 function acf_nav($currentPage = '') {
+  // Read session state inside the function
+  $loggedIn   = is_logged_in();
+  $isAdmin    = is_admin();
+  $user       = $loggedIn ? current_user() : null;
 ?>
 <!-- ══════════════════════════════════════════════════
      UTILITY BAR
@@ -38,12 +42,22 @@ function acf_nav($currentPage = '') {
 
     <!-- Main nav -->
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a class="nav-btn<?= $currentPage === 'home' ? ' active-page' : '' ?>"      href="index.php"     data-page="home">Home</a>
-      <a class="nav-btn<?= $currentPage === 'identity' ? ' active-page' : '' ?>"  href="identity.php"  data-page="identity">Our Identity</a>
-      <a class="nav-btn<?= $currentPage === 'projects' ? ' active-page' : '' ?>"  href="projects.php"  data-page="projects">Projects &amp; Impact</a>
-      <a class="nav-btn<?= $currentPage === 'partners' ? ' active-page' : '' ?>"  href="partners.php"  data-page="partners">Partners &amp; Voices</a>
+      <a class="nav-btn<?= $currentPage === 'home'      ? ' active-page' : '' ?>" href="index.php"     data-page="home">Home</a>
+      <a class="nav-btn<?= $currentPage === 'identity'  ? ' active-page' : '' ?>" href="identity.php"  data-page="identity">Our Identity</a>
+      <a class="nav-btn<?= $currentPage === 'projects'  ? ' active-page' : '' ?>" href="projects.php"  data-page="projects">Projects &amp; Impact</a>
+      <a class="nav-btn<?= $currentPage === 'partners'  ? ' active-page' : '' ?>" href="partners.php"  data-page="partners">Partners &amp; Voices</a>
       <a class="nav-btn<?= $currentPage === 'resources' ? ' active-page' : '' ?>" href="resources.php" data-page="resources">Resources &amp; Contact</a>
-      <a class="nav-cta-mobile" href="contact.php" style="display:none;">✉ Reach Us</a>
+
+      <?php if ($loggedIn): ?>
+        <!-- ── LOGGED IN: user menu (mobile) ── -->
+        <?php if ($isAdmin): ?>
+          <a class="nav-btn nav-btn--user" href="admin/dashboard.php">🏠 Dashboard</a>
+        <?php endif; ?>
+        <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php" style="display:none;">Sign Out</a>
+      <?php else: ?>
+        <!-- ── LOGGED OUT: login link (mobile) ── -->
+        <a class="nav-cta-mobile" href="login.php" style="display:none;">🔐 Sign In / Register</a>
+      <?php endif; ?>
     </nav>
 
     <!-- Hamburger (mobile) -->
@@ -51,8 +65,41 @@ function acf_nav($currentPage = '') {
       <span></span><span></span><span></span>
     </button>
 
-    <!-- Desktop CTA -->
-    <a class="nav-cta" href="contact.php">Reach Us</a>
+    <!-- ── RIGHT SIDE: desktop auth area ── -->
+    <div class="nav-auth">
+      <?php if ($loggedIn): ?>
+
+        <?php if ($isAdmin): ?>
+          <!-- Admin: Dashboard link + user pill + logout -->
+          <a class="nav-btn nav-btn--user" href="admin/dashboard.php">🏠 Dashboard</a>
+        <?php endif; ?>
+
+        <!-- User pill dropdown -->
+        <div class="nav-user-pill" id="nav-user-pill">
+          <span class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></span>
+          <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
+          <span class="nav-user-arrow">▾</span>
+
+          <div class="nav-user-dropdown" id="nav-user-dropdown">
+            <div class="nud-header">
+              <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
+              <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
+              <div class="nud-role-badge nud-role-badge--<?= $user['role'] ?>">
+                <?= $user['role'] === 'admin' ? '⚙ Admin' : '👤 Member' ?>
+              </div>
+            </div>
+            <?php if ($isAdmin): ?>
+              <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
+            <?php endif; ?>
+            <a class="nud-link nud-link--logout" href="logout.php">↩ Sign Out</a>
+          </div>
+        </div>
+
+      <?php else: ?>
+        <!-- Not logged in: Login button -->
+        <a class="nav-cta nav-cta--login" href="login.php">🔐 Sign In</a>
+      <?php endif; ?>
+    </div>
 
   </div>
 </header>

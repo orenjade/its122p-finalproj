@@ -1,9 +1,10 @@
 /* ═══════════════════════════════════════════════════════════
-   NAV-INIT.JS — ACF Philippines PHP version nav init
-   Nav/footer are server-side included, so this script only
-   handles the hamburger menu toggle and logo fallback.
+   NAV-INIT.JS — ACF Philippines nav init
+   Handles: hamburger menu, user dropdown, logo fallback
 ═══════════════════════════════════════════════════════════ */
 (function () {
+
+  /* ── Hamburger menu toggle ── */
   function initHamburger() {
     var hamburger = document.getElementById('nav-hamburger');
     var nav       = document.getElementById('main-nav');
@@ -33,9 +34,44 @@
     });
   }
 
+  /* ── User pill dropdown ── */
+  function initUserDropdown() {
+    var pill     = document.getElementById('nav-user-pill');
+    var dropdown = document.getElementById('nav-user-dropdown');
+    if (!pill || !dropdown) return;
+
+    pill.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = dropdown.classList.toggle('open');
+      pill.classList.toggle('open', isOpen);
+    });
+
+    // Close when clicking anywhere outside
+    document.addEventListener('click', function (e) {
+      if (!pill.contains(e.target)) {
+        dropdown.classList.remove('open');
+        pill.classList.remove('open');
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        dropdown.classList.remove('open');
+        pill.classList.remove('open');
+      }
+    });
+  }
+
+  /* ── Boot on DOM ready ── */
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHamburger);
+    document.addEventListener('DOMContentLoaded', function () {
+      initHamburger();
+      initUserDropdown();
+    });
   } else {
     initHamburger();
+    initUserDropdown();
   }
+
 })();
