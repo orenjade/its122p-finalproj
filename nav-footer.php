@@ -34,7 +34,7 @@ function acf_nav($currentPage = '') {
       <a class="nav-btn<?= $currentPage === 'identity'  ? ' active-page' : '' ?>" href="identity.php"  data-page="identity">Our Identity</a>
       <a class="nav-btn<?= $currentPage === 'projects'  ? ' active-page' : '' ?>" href="projects.php"  data-page="projects">Projects &amp; Impact</a>
       <a class="nav-btn<?= $currentPage === 'partners'  ? ' active-page' : '' ?>" href="partners.php"  data-page="partners">Partners &amp; Voices</a>
-      <a class="nav-btn<?= $currentPage === 'resources' ? ' active-page' : '' ?>" href="resources.php" data-page="resources">Resources &amp; Contact</a>
+      <a class="nav-btn<?= $currentPage === 'resources' ? ' active-page' : '' ?>" href="resources.php" data-page="resources">Resources</a>
 
       <?php if ($loggedIn): ?>
         <?php if ($isAdmin): ?>
@@ -61,18 +61,16 @@ function acf_nav($currentPage = '') {
           </div>
         </div>
 
-        <!-- Mobile: sign out -->
-        <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php" style="display:none;">↩ Sign Out</a>
+        <!-- Mobile logged-in: Sign Out + Reach Us side by side -->
+        <div class="nav-cta-row">
+          <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php">↩ Sign Out</a>
+          <a class="nav-cta-mobile" href="contact.php">✉ Reach Us</a>
+        </div>
 
       <?php else: ?>
-        <!-- Logged out: Login link visible in nav -->
-        <a class="nav-btn nav-btn--login<?= $currentPage === 'login' ? ' active-page' : '' ?>" href="login.php" data-page="login">🔐 Login</a>
-        <!-- Mobile: login -->
-        <a class="nav-cta-mobile nav-cta-mobile--ghost" href="login.php" style="display:none;">🔐 Login / Register</a>
+        <!-- Mobile logged-out: Login + Reach Us side by side -->
+        
       <?php endif; ?>
-
-      <!-- Mobile only: Reach Us always at bottom of menu -->
-      <a class="nav-cta-mobile" href="contact.php" style="display:none;">✉ Reach Us</a>
     </nav>
 
     <!-- Hamburger (mobile) -->
@@ -80,7 +78,10 @@ function acf_nav($currentPage = '') {
       <span></span><span></span><span></span>
     </button>
 
-    <!-- Desktop: Reach Us only, always on the far right -->
+    <!-- Desktop: Login (logged out) + Reach Us — always far right -->
+    <?php if (!$loggedIn): ?>
+      <a class="nav-cta nav-cta--navy" href="login.php">Login</a>
+    <?php endif; ?>
     <a class="nav-cta" href="contact.php">Reach Us</a>
 
   </div>
