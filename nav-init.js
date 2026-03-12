@@ -45,14 +45,8 @@
     pill.classList.remove('open');
 
     pill.addEventListener('click', function (e) {
-      var link = e.target.closest('a');
-
-      // If a dropdown link was clicked, let it navigate — don't toggle
-      if (link && dropdown.contains(link)) {
-        return; // allow default navigation
-      }
-
-      // Otherwise toggle the dropdown open/closed
+      // Allow clicks on links inside the dropdown to navigate normally
+      if (e.target.closest('a')) return;
       e.stopPropagation();
       var isOpen = dropdown.classList.toggle('open');
       pill.classList.toggle('open', isOpen);
