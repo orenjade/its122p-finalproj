@@ -95,6 +95,7 @@
   gap: 0.25rem;
   flex: 1;
   justify-content: center;
+  flex-wrap: nowrap;
 }
 .nav-btn {
   font-family: var(--font-body);
@@ -116,6 +117,8 @@
 .nav-btn .arrow { font-size: 0.6rem; opacity: .5; }
 
 /* ─── REACH US BUTTON (always far right) ─── */
+.nav-cta-row    { display: none; } /* mobile only — shown inside @media block */
+.nav-cta-mobile { display: none; } /* mobile only */
 .nav-cta {
   flex-shrink: 0;
   background: var(--orange);
@@ -172,7 +175,7 @@
 /* ─── USER PILL (logged in) ─── */
 .nav-user-pill {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   background: var(--navy);
@@ -183,6 +186,7 @@
   user-select: none;
   box-shadow: 0 3px 0 #130e45;
   transition: background .18s, transform .12s, box-shadow .12s;
+  flex-shrink: 0;
 }
 .nav-user-pill:hover {
   background: #2a1f80;
@@ -240,11 +244,13 @@
   border: 1.5px solid rgba(30,22,96,0.08);
   min-width: 230px;
   overflow: hidden;
-  z-index: 600;
+  z-index: 9999;
+  pointer-events: none;
 }
 .nav-user-dropdown.open {
   display: block !important;
   animation: nud-in .2s cubic-bezier(.22,.68,0,1.2) both;
+  pointer-events: auto;
 }
 
 @keyframes nud-in {
