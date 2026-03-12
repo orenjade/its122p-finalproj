@@ -79,5 +79,29 @@
     initHamburger();
     initUserDropdown();
   }
+   function initUserDropdown() {
+  var pill = document.getElementById('nav-user-pill');
+  if (!pill) return;
+
+  pill.addEventListener('click', function (e) {
+    // If they clicked a link inside the dropdown, let it happen
+    if (e.target.closest('a')) return;
+    
+    e.stopPropagation();
+    this.classList.toggle('open');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!pill.contains(e.target)) {
+      pill.classList.remove('open');
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') pill.classList.remove('open');
+  });
+}
 
 })();
