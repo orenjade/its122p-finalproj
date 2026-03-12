@@ -64,17 +64,24 @@ function acf_nav($currentPage = '') {
     <?php if ($loggedIn): ?>
       <!-- User pill with dropdown — sits outside nav so it doesn't affect nav flow -->
       <div class="nav-user-pill" id="nav-user-pill">
-        <span class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></span>
-        <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
-        <span class="nav-user-arrow">▾</span>
-        <div class="nav-user-dropdown" id="nav-user-dropdown">
-          <div class="nud-header">
-            <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
-            <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
-            <div class="nud-role-badge nud-role-badge--<?= $user['role'] ?>">
-              <?= $user['role'] === 'admin' ? '⚙ Admin' : '👤 Member' ?>
-            </div>
-          </div>
+  <div class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></div>
+  <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
+  <span class="nav-user-arrow">▾</span>
+  
+  <div class="nav-user-dropdown" id="nav-user-dropdown">
+    <div class="nud-header">
+      <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
+      <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
+      <div class="nud-role-badge nud-role-badge--<?= $user['role'] ?>">
+        <?= $user['role'] === 'admin' ? '⚙ Admin' : '👤 Member' ?>
+      </div>
+    </div>
+    <?php if ($isAdmin): ?>
+      <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
+    <?php endif; ?>
+    <a class="nud-link nud-link--logout" href="logout.php">↩ Sign Out</a>
+  </div>
+</div>
           <?php if ($isAdmin): ?>
             <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
           <?php endif; ?>
