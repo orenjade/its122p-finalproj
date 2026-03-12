@@ -447,6 +447,7 @@
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .nav-hamburger { display: flex; }
+  .nav-user-pill  { display: none; } /* hidden on mobile — use nav-cta-row instead */
 
   /* Hide Reach Us desktop button on mobile — shown inside hamburger menu instead */
   .nav-cta { display: none; }
