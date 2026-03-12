@@ -28,7 +28,7 @@ function acf_nav($currentPage = '') {
       </div>
     </a>
 
-    <!-- MAIN NAV: page links + user pill if logged in -->
+    <!-- MAIN NAV: page links only -->
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a class="nav-btn<?= $currentPage === 'home'      ? ' active-page' : '' ?>" href="index.php"     data-page="home">Home</a>
       <a class="nav-btn<?= $currentPage === 'identity'  ? ' active-page' : '' ?>" href="identity.php"  data-page="identity">Our Identity</a>
@@ -41,35 +41,17 @@ function acf_nav($currentPage = '') {
           <a class="nav-btn nav-btn--user" href="admin/dashboard.php">🏠 Dashboard</a>
         <?php endif; ?>
 
-        <!-- User pill with dropdown -->
-        <div class="nav-user-pill" id="nav-user-pill">
-          <span class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></span>
-          <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
-          <span class="nav-user-arrow">▾</span>
-          <div class="nav-user-dropdown" id="nav-user-dropdown">
-            <div class="nud-header">
-              <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
-              <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
-              <div class="nud-role-badge nud-role-badge--<?= $user['role'] ?>">
-                <?= $user['role'] === 'admin' ? '⚙ Admin' : '👤 Member' ?>
-              </div>
-            </div>
-            <?php if ($isAdmin): ?>
-              <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
-            <?php endif; ?>
-            <a class="nud-link nud-link--logout" href="logout.php">↩ Sign Out</a>
-          </div>
-        </div>
-
-        <!-- Mobile logged-in: Sign Out + Reach Us side by side -->
+        <!-- Mobile only: Sign Out + Reach Us side by side -->
         <div class="nav-cta-row">
           <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php">↩ Sign Out</a>
           <a class="nav-cta-mobile" href="contact.php">✉ Reach Us</a>
         </div>
-
       <?php else: ?>
-        <!-- Mobile logged-out: Login + Reach Us side by side -->
-        
+        <!-- Mobile only: Login + Reach Us side by side -->
+        <div class="nav-cta-row">
+          <a class="nav-cta-mobile nav-cta-mobile--navy" href="login.php">Login</a>
+          <a class="nav-cta-mobile" href="contact.php">✉ Reach Us</a>
+        </div>
       <?php endif; ?>
     </nav>
 
@@ -78,8 +60,28 @@ function acf_nav($currentPage = '') {
       <span></span><span></span><span></span>
     </button>
 
-    <!-- Desktop: Login (logged out) + Reach Us — always far right -->
-    <?php if (!$loggedIn): ?>
+    <!-- Desktop right side: user pill OR login btn + Reach Us -->
+    <?php if ($loggedIn): ?>
+      <!-- User pill with dropdown — sits outside nav so it doesn't affect nav flow -->
+      <div class="nav-user-pill" id="nav-user-pill">
+        <span class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></span>
+        <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
+        <span class="nav-user-arrow">▾</span>
+        <div class="nav-user-dropdown" id="nav-user-dropdown">
+          <div class="nud-header">
+            <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
+            <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
+            <div class="nud-role-badge nud-role-badge--<?= $user['role'] ?>">
+              <?= $user['role'] === 'admin' ? '⚙ Admin' : '👤 Member' ?>
+            </div>
+          </div>
+          <?php if ($isAdmin): ?>
+            <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
+          <?php endif; ?>
+          <a class="nud-link nud-link--logout" href="logout.php">↩ Sign Out</a>
+        </div>
+      </div>
+    <?php else: ?>
       <a class="nav-cta nav-cta--navy" href="login.php">Login</a>
     <?php endif; ?>
     <a class="nav-cta" href="contact.php">Reach Us</a>
