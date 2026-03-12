@@ -21,91 +21,122 @@ $currentPage = 'resources';
     /* Resources Page Specific Styles */
     .resources-header {
       text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .resources-header .id-section-sub {
-      color: #666;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 0 auto 3rem;
     }
 
+    /* ── Grid: mirrors .prog-grid layout ── */
     .resource-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.8rem;
     }
 
+    /* Default: each card spans 2 of 6 columns (3 per row) */
+    .resource-card { grid-column: span 2; }
+
+    /* Bottom row: 2 cards centered */
+    .resource-card.rc4 { grid-column: 2 / span 2; }
+    .resource-card.rc5 { grid-column: 4 / span 2; }
+
+    /* ── Card base (mirrors .prog-card) ── */
     .resource-card {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-left: 5px solid #FF8C00;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(30,22,96,.06);
+      position: relative;
+      transition: transform .3s ease, box-shadow .3s ease;
+      text-align: left;
     }
 
-    .resource-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-    }
+    /* Accent backgrounds per card */
+    .rc1 { background: #fff; }
+    .rc2 { background: #f0faf8; }
+    .rc3 { background: #eef5fc; }
+    .rc4 { background: #f5f0fc; }
+    .rc5 { background: #fff5ee; }
 
+    /* Pop-shadow hover per card — same style as prog-cards */
+    .rc1:hover { transform: translateX(-5px) translateY(-5px); box-shadow: 5px 5px 0 #E8630A, 9px 9px 0 rgba(232,99,10,.18); }
+    .rc2:hover { transform: translateX(-5px) translateY(-5px); box-shadow: 5px 5px 0 #2E7BBF, 9px 9px 0 rgba(46,123,191,.18); }
+    .rc3:hover { transform: translateX(-5px) translateY(-5px); box-shadow: 5px 5px 0 #0E9E8E, 9px 9px 0 rgba(14,158,142,.18); }
+    .rc4:hover { transform: translateX(-5px) translateY(-5px); box-shadow: 5px 5px 0 #9B59B6, 9px 9px 0 rgba(155,89,182,.18); }
+    .rc5:hover { transform: translateX(-5px) translateY(-5px); box-shadow: 5px 5px 0 #E8924A, 9px 9px 0 rgba(232,146,74,.18); }
+
+    /* ── Icon wrap ── */
     .resource-icon-wrap {
-      width: 60px;
-      height: 60px;
-      background: #f0f0f0;
-      border-radius: 12px;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 1.4rem;
+      font-size: 1.8rem;
     }
+    .rc1 .resource-icon-wrap { background: rgba(232,99,10,.10); }
+    .rc2 .resource-icon-wrap { background: rgba(14,158,142,.10); }
+    .rc3 .resource-icon-wrap { background: rgba(46,123,191,.12); }
+    .rc4 .resource-icon-wrap { background: rgba(155,89,182,.12); }
+    .rc5 .resource-icon-wrap { background: rgba(232,146,74,.12); }
 
-    .resource-icon {
-      font-size: 2rem;
-    }
-
+    /* ── Typography ── */
     .resource-title {
       font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: #1E1660;
-      margin-bottom: 12px;
+      margin-bottom: .5rem;
+      line-height: 1.25;
     }
 
     .resource-desc {
-      color: #555;
-      margin-bottom: 20px;
-      line-height: 1.6;
+      font-size: .92rem;
+      color: #58587A;
+      margin-bottom: 1.4rem;
+      line-height: 1.68;
     }
 
+    /* ── Download button ── */
     .btn-download {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       background: #1E1660;
       color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
+      padding: .75rem 1.5rem;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: 700;
-      transition: background 0.3s;
+      font-weight: 900;
+      font-size: .9rem;
       font-family: 'Fredoka One', cursive;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 0 #0d0c3a;
+      transition: transform .12s, box-shadow .12s, background .18s;
     }
-
     .btn-download:hover {
-      background: #FF8C00;
+      background: #E8630A;
+      box-shadow: 0 2px 0 #b84d08;
+      transform: translateY(2px);
     }
 
+    /* ── Meta ── */
     .resource-meta {
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 15px;
+      font-size: .78rem;
+      color: #999;
+      font-weight: 700;
+      margin-top: 1rem;
     }
 
-    @media (max-width: 768px) {
-      .resource-grid {
-        grid-template-columns: 1fr;
-      }
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .resource-grid { grid-template-columns: repeat(2, 1fr); }
+      .resource-card,
+      .resource-card.rc4,
+      .resource-card.rc5 { grid-column: span 1; }
+    }
+    @media (max-width: 640px) {
+      .resource-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -158,15 +189,15 @@ $currentPage = 'resources';
         <div class="resource-grid">
           
           <!-- Resource 1 -->
-          <div class="resource-card reveal reveal-delay-1">
+          <div class="resource-card rc1 reveal reveal-delay-1">
             <div class="resource-icon-wrap">
               <span class="resource-icon">📄</span>
             </div>
             <h3 class="resource-title">2024 Annual Report</h3>
             <p class="resource-desc">A comprehensive look at our impact, financials, and achievements in empowering communities this year.</p>
-            <a href="resources/reports/2024-annual-report.pdf" class="btn-download" download>
+            <a href="resources/reports/2024-annual-report.pdf" class="btn-download" download="2024-annual-report.pdf">
               <span>Download PDF</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
@@ -176,31 +207,31 @@ $currentPage = 'resources';
           </div>
 
           <!-- Resource 2 -->
-          <div class="resource-card reveal reveal-delay-2">
+          <div class="resource-card rc2 reveal reveal-delay-2">
             <div class="resource-icon-wrap">
               <span class="resource-icon">🎥</span>
             </div>
             <h3 class="resource-title">Youth Leadership Video</h3>
             <p class="resource-desc">Watch highlights from our recent workshop series designed for the next generation of leaders.</p>
-            <a href="resources/videos/youth-leadership.mp4" class="btn-download" download>
-              <span>Watch Video</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <a href="https://youtu.be/qNjVwfIz2tc?si=Giu3RoN71958nktb" class="btn-download" target="_blank" rel="noopener noreferrer">
+              <span>Watch on YouTube</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polygon points="5 3 19 12 5 21 5 3"/>
               </svg>
             </a>
-            <div class="resource-meta">📅 Updated: December 2024 | 📊 45 MB</div>
+            <div class="resource-meta">📅 Updated: December 2024 | ▶️ YouTube</div>
           </div>
 
           <!-- Resource 3 -->
-          <div class="resource-card reveal reveal-delay-3">
+          <div class="resource-card rc3 reveal reveal-delay-3">
             <div class="resource-icon-wrap">
               <span class="resource-icon">📜</span>
             </div>
             <h3 class="resource-title">Voters Education Guide</h3>
             <p class="resource-desc">A step-by-step guide on how to register and participate in the upcoming elections.</p>
-            <a href="resources/guides/voters-education-guide.pdf" class="btn-download" download>
+            <a href="resources/guides/voters-education-guide.pdf" class="btn-download" download="voters-education-guide.pdf">
               <span>Download PDF</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
@@ -210,15 +241,15 @@ $currentPage = 'resources';
           </div>
 
           <!-- Resource 4 -->
-          <div class="resource-card reveal reveal-delay-1">
+          <div class="resource-card rc4 reveal reveal-delay-1">
             <div class="resource-icon-wrap">
               <span class="resource-icon">📊</span>
             </div>
             <h3 class="resource-title">Policy Paper: Governance</h3>
             <p class="resource-desc">Our research on systemic approaches to improving local governance and transparency.</p>
-            <a href="resources/reports/governance-policy-paper.pdf" class="btn-download" download>
+            <a href="resources/reports/governance-policy-paper.pdf" class="btn-download" download="governance-policy-paper.pdf">
               <span>Download PDF</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
@@ -228,15 +259,15 @@ $currentPage = 'resources';
           </div>
 
           <!-- Resource 5 -->
-          <div class="resource-card reveal reveal-delay-2">
+          <div class="resource-card rc5 reveal reveal-delay-2">
             <div class="resource-icon-wrap">
               <span class="resource-icon">📋</span>
             </div>
             <h3 class="resource-title">Organizational Bylaws</h3>
             <p class="resource-desc">Official bylaws and governance documents of the Active Citizenship Foundation.</p>
-            <a href="resources/reports/bylaws.pdf" class="btn-download" download>
+            <a href="resources/reports/bylaws.pdf" class="btn-download" download="bylaws.pdf">
               <span>Download PDF</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
