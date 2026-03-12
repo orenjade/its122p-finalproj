@@ -42,13 +42,13 @@ function acf_nav($currentPage = '') {
         <?php endif; ?>
 
         <!-- Mobile only: Sign Out + Reach Us side by side -->
-        <div class="nav-cta-row">
+        <div class="nav-cta-row" style="display:none;">
           <a class="nav-cta-mobile nav-cta-mobile--ghost" href="logout.php">↩ Sign Out</a>
           <a class="nav-cta-mobile" href="contact.php">✉ Reach Us</a>
         </div>
       <?php else: ?>
         <!-- Mobile only: Login + Reach Us side by side -->
-        <div class="nav-cta-row">
+        <div class="nav-cta-row" style="display:none;">
           <a class="nav-cta-mobile nav-cta-mobile--navy" href="login.php">Login</a>
           <a class="nav-cta-mobile" href="contact.php">✉ Reach Us</a>
         </div>
@@ -64,28 +64,40 @@ function acf_nav($currentPage = '') {
     <?php if ($loggedIn): ?>
       <!-- User pill with dropdown — sits outside nav so it doesn't affect nav flow -->
       <div class="nav-user-pill" id="nav-user-pill">
-  <div class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></div>
-  <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
-  <span class="nav-user-arrow">▾</span>
-  
-  <div class="nav-user-dropdown" id="nav-user-dropdown">
-    <div class="nud-header">
-      <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
-      <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
-      <div class="nud-role-badge nud-role-badge--<?= $user['role'] ?>">
-        <?= $user['role'] === 'admin' ? '⚙ Admin' : '👤 Member' ?>
-      </div>
-    </div>
-    <?php if ($isAdmin): ?>
-      <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
-    <?php endif; ?>
-    <a class="nud-link nud-link--logout" href="logout.php">↩ Sign Out</a>
-  </div>
-</div>
-          <?php if ($isAdmin): ?>
-            <a class="nud-link" href="admin/dashboard.php">🏠 Admin Dashboard</a>
-          <?php endif; ?>
-          <a class="nud-link nud-link--logout" href="logout.php">↩ Sign Out</a>
+        <span class="nav-user-avatar"><?= strtoupper(substr($user['name'], 0, 1)) ?></span>
+        <span class="nav-user-name"><?= htmlspecialchars(explode(' ', $user['name'])[0]) ?></span>
+        <span class="nav-user-arrow">▾</span>
+
+        <div class="nav-user-dropdown" id="nav-user-dropdown">
+
+          <!-- Header: big avatar + name + email -->
+          <div class="nud-header">
+            <div class="nud-avatar-lg"><?= strtoupper(substr($user['name'], 0, 1)) ?></div>
+            <div class="nud-header-text">
+              <div class="nud-name"><?= htmlspecialchars($user['name']) ?></div>
+              <div class="nud-email"><?= htmlspecialchars($user['email']) ?></div>
+            </div>
+          </div>
+
+          <!-- Group 1: app links -->
+          <div class="nud-links-group">
+            <?php if ($isAdmin): ?>
+              <a class="nud-link" href="admin/dashboard.php">
+                <span class="nud-link-icon">🏠</span> Admin Dashboard
+              </a>
+            <?php endif; ?>
+            <a class="nud-link" href="index.php">
+              <span class="nud-link-icon">🌐</span> View Site
+            </a>
+          </div>
+
+          <!-- Group 2: sign out -->
+          <div class="nud-links-group">
+            <a class="nud-link nud-link--logout" href="logout.php">
+              <span class="nud-link-icon">↩</span> Sign Out
+            </a>
+          </div>
+
         </div>
       </div>
     <?php else: ?>
